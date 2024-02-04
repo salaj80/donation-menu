@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+import Monthly from './components/Monthly.jsx';
+import Once from './components/Once.jsx';
 
 function App() {
+
+  const [showComponentA, setShowComponentA] = useState(true);
+  const [showComponentB, setShowComponentB] = useState(false);
+
+  const showA = () => {
+    setShowComponentA(true);
+    setShowComponentB(false);
+  };
+
+  const showB = () => {
+    setShowComponentA(false);
+    setShowComponentB(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className='flex lg:ml-[26.5%] lg:mt-[10%] font-semibold'>
+      <button onClick={showA} className={`p-5 border-solid border-t border-l border-gray-200 ${showComponentA ? 'bg-white text-blue-800' : 'bg-blue-800 text-white'} rounded-sm`} >Donate monthly</button>
+      <button onClick={showB} className={`p-5 border-solid border-t border-r border-gray-200 ${showComponentA ? 'bg-blue-800 text-white' : 'bg-white text-blue-800'} rounded-sm`}>Donate once</button>
+      </div>
+      {showComponentA && <Monthly />}
+      {showComponentB && <Once />}
     </div>
   );
 }
